@@ -20,6 +20,7 @@ import java.io.IOException;
 public class JavaFxApplication extends Application {
 
 	private ConfigurableApplicationContext context;
+	public static Stage stage;
 
 	@Override
 	public void init() {
@@ -36,14 +37,27 @@ public class JavaFxApplication extends Application {
 	}
 
 	@Override
-	public void start(Stage stage) throws IOException {
+	public void start(Stage primaryStage) {
+		stage = primaryStage;
 		this.context.publishEvent(new StageReadyEvent(stage));
 	}
 
 	@Override
-	public void stop() throws Exception {
+	public void stop() {
 		this.context.close();
 		Platform.exit();
+	}
+
+	public void mudarPagina(String pagina) throws IOException {
+		switch (pagina) {
+			case "login":
+				this.context.publishEvent(new StageReadyEvent(stage));
+				break;
+			case "cadastro":
+				this.context.publishEvent(new StageReadyEvent2(stage));
+				break;
+
+		}
 	}
 }
 
@@ -55,7 +69,7 @@ class StageInitializer implements ApplicationListener<StageReadyEvent> {
 	private final ApplicationContext applicationContext;
 
 	StageInitializer(@Value("${spring.application.ui.title}") String applicationTitle,
-																		ApplicationContext applicationContext) {
+					 ApplicationContext applicationContext) {
 		this.applicationTitle = applicationTitle;
 		this.applicationContext = applicationContext;
 	}
@@ -72,8 +86,7 @@ class StageInitializer implements ApplicationListener<StageReadyEvent> {
 			stage.setScene(scene);
 			stage.setTitle(this.applicationTitle);
 			stage.show();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -84,6 +97,51 @@ class StageReadyEvent extends ApplicationEvent {
 	private final Stage stage;
 
 	StageReadyEvent(Stage stage) {
+		super(stage);
+		this.stage = stage;
+	}
+
+	public Stage getStage() {
+		return stage;
+	}
+}
+
+@Log4j2
+@Component
+class StageInitializer2 implements ApplicationListener<StageReadyEvent2> {
+
+	private final String applicationTitle;
+	private final ApplicationContext applicationContext;
+
+	StageInitializer2(@Value("${spring.application.ui.title}") String applicationTitle,
+					 ApplicationContext applicationContext) {
+		this.applicationTitle = applicationTitle;
+		this.applicationContext = applicationContext;
+	}
+
+	@Override
+	public void onApplicationEvent(StageReadyEvent2 stageReadyEvent) {
+		try {
+			Stage stage = stageReadyEvent.getStage();
+			ClassPathResource fxml = new ClassPathResource("/fxml/cadastro.fxml");
+			FXMLLoader fxmlLoader = new FXMLLoader(fxml.getURL());
+			fxmlLoader.setControllerFactory(this.applicationContext::getBean);
+			Parent root = fxmlLoader.load();
+			Scene scene = new Scene(root, 800, 600);
+			stage.setScene(scene);
+			stage.setTitle(this.applicationTitle);
+			stage.show();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+}
+
+class StageReadyEvent2 extends ApplicationEvent {
+
+	private final Stage stage;
+
+	StageReadyEvent2(Stage stage) {
 		super(stage);
 		this.stage = stage;
 	}

@@ -1,6 +1,6 @@
 package com.example.lojacosturafx.controllers;
 
-import javafx.application.HostServices;
+import com.example.lojacosturafx.JavaFxApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,11 +10,12 @@ import javafx.scene.input.MouseEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 @RequiredArgsConstructor
 @Component
 public class LoginController {
-
-    private final HostServices hostServices;
+    public final JavaFxApplication javaFxApplication;
 
     @FXML
     private Label btnEsqueciASenha;
@@ -35,13 +36,17 @@ public class LoginController {
     private TextField tfEmail;
 
     @FXML
-    void handleButtonAction(MouseEvent event) {
+    void onCliqueCadastro(MouseEvent event) throws IOException {
+        javaFxApplication.mudarPagina("cadastro");
+    }
+
+    @FXML
+    void onCliqueEsqueciASenha(MouseEvent event) {
 
     }
-//    @FXML
-//    public void initialize() {
-//        this.button.setOnAction(actionEvent ->
-//                this.label.setText(this.hostServices.getDocumentBase())
-//        );
-//    }
+
+    @FXML
+    void onCliqueLogar(MouseEvent event) {
+
+    }
 }
