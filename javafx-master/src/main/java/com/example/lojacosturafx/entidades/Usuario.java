@@ -1,6 +1,5 @@
 package com.example.lojacosturafx.entidades;
 
-import com.example.lojacosturafx.dtos.UsuarioDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

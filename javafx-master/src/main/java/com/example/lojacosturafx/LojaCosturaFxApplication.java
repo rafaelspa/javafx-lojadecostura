@@ -10,3 +10,5 @@ public class LojaCosturaFxApplication {
 		Application.launch(JavaFxApplication.class, args);
 	}
 }
+
+//https://www.youtube.com/watch?v=_pm7tzGsheY crud com lista

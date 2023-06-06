@@ -36,6 +36,6 @@
       <Button fx:id="modelsButton" mnemonicParsing="false" onAction="#modelsAction" prefHeight="40.0" prefWidth="222.0" text="Modelos" GridPane.columnIndex="2" GridPane.rowIndex="5" />
       <Button fx:id="piecesButton" mnemonicParsing="false" onAction="#piecesAction" prefHeight="40.0" prefWidth="258.0" text="Peças" GridPane.columnIndex="2" GridPane.rowIndex="4" />
       <Button fx:id="fabricButton" mnemonicParsing="false" onAction="#fabricAction" prefHeight="40.0" prefWidth="216.0" text="Tecidos" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <Button fx:id="clientButton" mnemonicParsing="false" onAction="#clientAction" prefHeight="40.0" prefWidth="216.0" text="Clientes" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Button fx:id="clientButton" mnemonicParsing="false" onMouseClicked="#clientAction" prefHeight="40.0" prefWidth="216.0" text="Clientes" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
 </GridPane>

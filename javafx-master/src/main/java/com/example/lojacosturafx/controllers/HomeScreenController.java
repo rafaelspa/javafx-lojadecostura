@@ -1,15 +1,19 @@
 package com.example.lojacosturafx.controllers;
 
+import com.example.lojacosturafx.JavaFxApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.input.MouseEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
 public class HomeScreenController {
+
+    private final JavaFxApplication javaFxApplication;
 
     @FXML
     private Button AddonButton;
@@ -54,8 +58,8 @@ public class HomeScreenController {
     }
 
     @FXML
-    void clientAction(ActionEvent event) {
-
+    void clientAction(MouseEvent event) {
+        javaFxApplication.publicarContextoPagina("clientes");
     }
 
     @FXML
