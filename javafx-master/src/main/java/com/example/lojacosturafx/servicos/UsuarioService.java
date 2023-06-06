@@ -22,4 +22,8 @@ public class UsuarioService {
         usuario.fromDTO(usuarioDTO);
         usuarioRepository.save(usuario);
     }
+
+    public Usuario findByEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
 }

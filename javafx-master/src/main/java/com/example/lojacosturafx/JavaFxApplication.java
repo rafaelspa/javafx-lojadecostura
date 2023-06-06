@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -39,7 +40,7 @@ public class JavaFxApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		stage = primaryStage;
-		this.context.publishEvent(new StageReadyEvent(stage));
+		publicarContextoPagina("login");
 	}
 
 	@Override
@@ -48,37 +49,29 @@ public class JavaFxApplication extends Application {
 		Platform.exit();
 	}
 
-	public void mudarPagina(String pagina) throws IOException {
-		switch (pagina) {
-			case "login":
-				this.context.publishEvent(new StageReadyEvent(stage));
-				break;
-			case "cadastro":
-				this.context.publishEvent(new StageReadyEvent2(stage));
-				break;
-
-		}
+	public void publicarContextoPagina(String pagina) {
+		this.context.publishEvent(new StageReadyEventGeral(stage, pagina));
 	}
 }
 
 @Log4j2
 @Component
-class StageInitializer implements ApplicationListener<StageReadyEvent> {
+class StageInitializerGeral implements ApplicationListener<StageReadyEventGeral> {
 
 	private final String applicationTitle;
 	private final ApplicationContext applicationContext;
 
-	StageInitializer(@Value("${spring.application.ui.title}") String applicationTitle,
+	StageInitializerGeral(@Value("${spring.application.ui.title}") String applicationTitle,
 					 ApplicationContext applicationContext) {
 		this.applicationTitle = applicationTitle;
 		this.applicationContext = applicationContext;
 	}
 
 	@Override
-	public void onApplicationEvent(StageReadyEvent stageReadyEvent) {
+	public void onApplicationEvent(StageReadyEventGeral stageReadyEvent) {
 		try {
 			Stage stage = stageReadyEvent.getStage();
-			ClassPathResource fxml = new ClassPathResource("/fxml/login.fxml");
+			ClassPathResource fxml = new ClassPathResource("/fxml/" + stageReadyEvent.getPagina() + ".fxml");
 			FXMLLoader fxmlLoader = new FXMLLoader(fxml.getURL());
 			fxmlLoader.setControllerFactory(this.applicationContext::getBean);
 			Parent root = fxmlLoader.load();
@@ -92,61 +85,15 @@ class StageInitializer implements ApplicationListener<StageReadyEvent> {
 	}
 }
 
-class StageReadyEvent extends ApplicationEvent {
+@Getter
+class StageReadyEventGeral extends ApplicationEvent {
 
 	private final Stage stage;
+	private final String pagina;
 
-	StageReadyEvent(Stage stage) {
+	StageReadyEventGeral(Stage stage, String pagina) {
 		super(stage);
 		this.stage = stage;
-	}
-
-	public Stage getStage() {
-		return stage;
-	}
-}
-
-@Log4j2
-@Component
-class StageInitializer2 implements ApplicationListener<StageReadyEvent2> {
-
-	private final String applicationTitle;
-	private final ApplicationContext applicationContext;
-
-	StageInitializer2(@Value("${spring.application.ui.title}") String applicationTitle,
-					 ApplicationContext applicationContext) {
-		this.applicationTitle = applicationTitle;
-		this.applicationContext = applicationContext;
-	}
-
-	@Override
-	public void onApplicationEvent(StageReadyEvent2 stageReadyEvent) {
-		try {
-			Stage stage = stageReadyEvent.getStage();
-			ClassPathResource fxml = new ClassPathResource("/fxml/cadastro.fxml");
-			FXMLLoader fxmlLoader = new FXMLLoader(fxml.getURL());
-			fxmlLoader.setControllerFactory(this.applicationContext::getBean);
-			Parent root = fxmlLoader.load();
-			Scene scene = new Scene(root, 800, 600);
-			stage.setScene(scene);
-			stage.setTitle(this.applicationTitle);
-			stage.show();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-}
-
-class StageReadyEvent2 extends ApplicationEvent {
-
-	private final Stage stage;
-
-	StageReadyEvent2(Stage stage) {
-		super(stage);
-		this.stage = stage;
-	}
-
-	public Stage getStage() {
-		return stage;
+		this.pagina = pagina;
 	}
 }

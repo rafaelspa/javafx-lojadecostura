@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lojacosturafx.controllers.HomeScreenController">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="10.0" prefWidth="125.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="10.0" prefWidth="80.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.0" minWidth="10.0" prefWidth="204.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.0" minWidth="10.0" prefWidth="201.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Hyperlink fx:id="logoutLink" onAction="#logoutAction" prefHeight="31.0" prefWidth="88.0" text="Log Out" GridPane.columnIndex="1" />
+      <Button fx:id="accountButton" mnemonicParsing="false" onAction="#accountAction" prefHeight="40.0" prefWidth="106.0" text="Conta">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="budgetButton" alignment="CENTER" mnemonicParsing="false" onAction="#budgetAction" prefHeight="72.0" prefWidth="223.0" text="Orçamentos" GridPane.columnIndex="2" />
+      <Button fx:id="orderButton" mnemonicParsing="false" onAction="#orderAction" prefHeight="40.0" prefWidth="211.0" text="Pedidos" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <Button fx:id="AddonButton" mnemonicParsing="false" onAction="#AddonAction" prefHeight="40.0" prefWidth="250.0" text="Adicionais" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+      <Button fx:id="modelsButton" mnemonicParsing="false" onAction="#modelsAction" prefHeight="40.0" prefWidth="222.0" text="Modelos" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <Button fx:id="piecesButton" mnemonicParsing="false" onAction="#piecesAction" prefHeight="40.0" prefWidth="258.0" text="Peças" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <Button fx:id="fabricButton" mnemonicParsing="false" onAction="#fabricAction" prefHeight="40.0" prefWidth="216.0" text="Tecidos" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <Button fx:id="clientButton" mnemonicParsing="false" onAction="#clientAction" prefHeight="40.0" prefWidth="216.0" text="Clientes" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+   </children>
+</GridPane>

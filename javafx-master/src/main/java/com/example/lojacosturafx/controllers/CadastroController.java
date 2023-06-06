@@ -43,16 +43,15 @@ public class CadastroController implements Initializable {
         if (tfEmail.getText().isEmpty() || tfNomeCompleto.getText().isEmpty() || tfSenha.getText().isEmpty()) {
 //            lblStatus.setTextFill(Color.TOMATO);
 //            lblStatus.setText("Enter all details");
-            System.out.println("n foi");
         } else {
-            System.out.println("foi");
             saveData();
         }
     }
 
     @FXML
     void onCliqueVolta(MouseEvent event) throws IOException {
-        javaFxApplication.mudarPagina("login");
+//        javaFxApplication.mudarPagina("login");
+        javaFxApplication.publicarContextoPagina("login");
     }
 
     private ObservableList<ObservableList> data;
@@ -74,6 +73,7 @@ public class CadastroController implements Initializable {
         usuarioService.create(usuarioDTO);
 //        lblStatus.setTextFill(Color.GREEN);
 //        lblStatus.setText("Added Successfully");
-        javaFxApplication.mudarPagina("login");
+//        javaFxApplication.mudarPagina("login");
+        javaFxApplication.publicarContextoPagina("login");
     }
 }

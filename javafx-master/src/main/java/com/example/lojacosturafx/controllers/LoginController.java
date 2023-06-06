@@ -1,6 +1,8 @@
 package com.example.lojacosturafx.controllers;
 
 import com.example.lojacosturafx.JavaFxApplication;
+import com.example.lojacosturafx.entidades.Usuario;
+import com.example.lojacosturafx.servicos.UsuarioService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +18,7 @@ import java.io.IOException;
 @Component
 public class LoginController {
     public final JavaFxApplication javaFxApplication;
+    public final UsuarioService usuarioService;
 
     @FXML
     private Label btnEsqueciASenha;
@@ -37,16 +40,31 @@ public class LoginController {
 
     @FXML
     void onCliqueCadastro(MouseEvent event) throws IOException {
-        javaFxApplication.mudarPagina("cadastro");
+//        javaFxApplication.mudarPagina("cadastro");
+        javaFxApplication.publicarContextoPagina("cadastro");
     }
 
     @FXML
-    void onCliqueEsqueciASenha(MouseEvent event) {
-
+    void onCliqueEsqueciASenha(MouseEvent event) throws IOException {
+//        javaFxApplication.mudarPagina("esqueci-senha");
+        javaFxApplication.publicarContextoPagina("esqueci-senha");
     }
 
     @FXML
-    void onCliqueLogar(MouseEvent event) {
+    void onCliqueLogar(MouseEvent event) throws Exception {
+        Usuario usuario = usuarioService.findByEmail(tfEmail.getText().toString());
+        if (usuario == null) {
+            tfEmail.setText("");
+            throw new Exception("Usuario não encontrado");
+        }
+        if(usuario.getSenhaUsuario().equals(tfSenha.getText().toString())){
+//            javaFxApplication.mudarPagina(("homeScreen"));
+            javaFxApplication.publicarContextoPagina(("homeScreen"));
+        }
+        else{
+            tfSenha.setText("");
+            throw new Exception("Senha incorreta");
+        }
 
     }
 }
