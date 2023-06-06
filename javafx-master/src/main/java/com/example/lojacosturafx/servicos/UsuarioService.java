@@ -1,6 +1,5 @@
 package com.example.lojacosturafx.servicos;
 
-import com.example.lojacosturafx.dtos.UsuarioDTO;
 import com.example.lojacosturafx.entidades.Usuario;
 import com.example.lojacosturafx.repositorios.UsuarioRepository;
 import lombok.AllArgsConstructor;
@@ -17,9 +16,7 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public void create(UsuarioDTO usuarioDTO) {
-        Usuario usuario = new Usuario();
-        usuario.fromDTO(usuarioDTO);
+    public void create(Usuario usuario) {
         usuarioRepository.save(usuario);
     }
 

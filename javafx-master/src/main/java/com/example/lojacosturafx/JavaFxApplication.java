@@ -40,7 +40,8 @@ public class JavaFxApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		stage = primaryStage;
-		publicarContextoPagina("login");
+//		publicarContextoPagina("login"); // deixar login
+		publicarContextoPagina("homeScreen");
 	}
 
 	@Override

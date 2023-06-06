@@ -2,6 +2,7 @@ package com.example.lojacosturafx.controllers;
 
 import com.example.lojacosturafx.JavaFxApplication;
 import com.example.lojacosturafx.dtos.UsuarioDTO;
+import com.example.lojacosturafx.entidades.Usuario;
 import com.example.lojacosturafx.repositorios.UsuarioRepository;
 import com.example.lojacosturafx.servicos.UsuarioService;
 import javafx.collections.ObservableList;
@@ -69,8 +70,8 @@ public class CadastroController implements Initializable {
     }
 
     private void saveData() throws IOException {
-        UsuarioDTO usuarioDTO = new UsuarioDTO(tfNomeCompleto.getText(), tfEmail.getText(), tfSenha.getText());
-        usuarioService.create(usuarioDTO);
+        Usuario usuario = new Usuario(tfNomeCompleto.getText(), tfEmail.getText(), tfSenha.getText());
+        usuarioService.create(usuario);
 //        lblStatus.setTextFill(Color.GREEN);
 //        lblStatus.setText("Added Successfully");
 //        javaFxApplication.mudarPagina("login");

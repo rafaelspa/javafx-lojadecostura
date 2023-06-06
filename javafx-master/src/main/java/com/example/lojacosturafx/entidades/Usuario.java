@@ -22,10 +22,9 @@ public class Usuario {
     private String emailUsuario;
     private String senhaUsuario;
 
-    public void fromDTO(UsuarioDTO usuarioDTO) {
-        id = usuarioDTO.getId();
-        nomeUsuario = usuarioDTO.getNomeUsuario();
-        emailUsuario = usuarioDTO.getEmailUsuario();
-        senhaUsuario = usuarioDTO.getSenhaUsuario();
+    public Usuario(String nomeUsuario, String emailUsuario, String senhaUsuario) {
+        this.nomeUsuario = nomeUsuario;
+        this.emailUsuario = emailUsuario;
+        this.senhaUsuario = senhaUsuario;
     }
 }
