@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="245.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lojacosturafx.controllers.ClienteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="245.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lojacosturafx.controllers.PecaController">
     <children>
         <VBox layoutX="26.0" layoutY="22.0" spacing="15.0">
             <children>
@@ -24,12 +24,7 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label text="Telefone">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Label>
-                <Label text="Email">
+                <Label text="Precobase">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -40,25 +35,23 @@
             <children>
 <!--                <TextField fx:id="tfId" />-->
                 <TextField fx:id="tfNome" />
-                <TextField fx:id="tfTelefone" />
-                <TextField fx:id="tfEmail" />
+                <TextField fx:id="tfPrecoBase" />
             </children>
         </VBox>
 
         <HBox layoutX="26.0" layoutY="202.0" spacing="10.0">
             <children>
-                <Button fx:id="insertClienteButton" mnemonicParsing="false" onAction="#insertClienteButton" prefHeight="30.0" prefWidth="60.0" text="Insert" />
-                <Button fx:id="updateClienteButton" mnemonicParsing="false" onAction="#updateClienteButton" prefHeight="30.0" prefWidth="60.0" text="Update" />
-                <Button fx:id="deleteClienteButton" mnemonicParsing="false" onAction="#deleteClienteButton" prefHeight="30.0" prefWidth="60.0" text="Delete" />
+                <Button fx:id="insertPecaButton" mnemonicParsing="false" onAction="#insertPecaButton" prefHeight="30.0" prefWidth="60.0" text="Insert" />
+                <Button fx:id="updatePecaButton" mnemonicParsing="false" onAction="#updatePecaButton" prefHeight="30.0" prefWidth="60.0" text="Update" />
+                <Button fx:id="deletePecaButton" mnemonicParsing="false" onAction="#deletePecaButton" prefHeight="30.0" prefWidth="60.0" text="Delete" />
             </children>
         </HBox>
 
-        <TableView fx:id="tvClientes" layoutX="238.0" layoutY="22.0" onMouseClicked="#onCliqueTvCliente" prefHeight="210.0" prefWidth="400.0">
+        <TableView fx:id="tvPecas" layoutX="238.0" layoutY="22.0" onMouseClicked="#onCliqueTvPeca" prefHeight="210.0" prefWidth="400.0">
             <columns>
                 <TableColumn fx:id="tcId" prefWidth="35.0" text="ID" />
                 <TableColumn fx:id="tcNome" prefWidth="120.0" text="Nome" />
-                <TableColumn fx:id="tcTelefone" prefWidth="120.0" text="Telefone" />
-                <TableColumn fx:id="tcEmail" prefWidth="120.0" text="Email" />
+                <TableColumn fx:id="tcPrecoBase" prefWidth="120.0" text="Preco base" />
             </columns>
         </TableView>
 
@@ -104,6 +97,6 @@
                 <TableColumn fx:id="tcTamanhoMedida" prefWidth="120.0" text="Tamanho" />
             </columns>
         </TableView>
-      <Button fx:id="btnHome" layoutX="682.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onCliqueHome" text="Home" />
+        <Button fx:id="btnHome" layoutX="682.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onCliqueHome" text="Home" />
     </children>
 </AnchorPane>

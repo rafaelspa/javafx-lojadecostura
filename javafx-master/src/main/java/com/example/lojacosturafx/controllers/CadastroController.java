@@ -1,11 +1,8 @@
 package com.example.lojacosturafx.controllers;
 
 import com.example.lojacosturafx.JavaFxApplication;
-import com.example.lojacosturafx.dtos.UsuarioDTO;
 import com.example.lojacosturafx.entidades.Usuario;
-import com.example.lojacosturafx.repositorios.UsuarioRepository;
 import com.example.lojacosturafx.servicos.UsuarioService;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -51,13 +48,8 @@ public class CadastroController implements Initializable {
 
     @FXML
     void onCliqueVolta(MouseEvent event) throws IOException {
-//        javaFxApplication.mudarPagina("login");
         javaFxApplication.publicarContextoPagina("login");
     }
-
-    private ObservableList<ObservableList> data;
-    private UsuarioRepository usuarioRepository;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -10,25 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "modelos")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Cliente {
+public class Modelo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String telefone;
-    private String email;
+    private Double multiplicador;
 
     @OneToMany(fetch = FetchType.EAGER)
-    List<Medida> medidas = new ArrayList<>();
+    List<Peca> pecas = new ArrayList<>();
 
-    public Cliente(String nome, String telefone, String email) {
+    public Modelo(String nome, Double multiplicador) {
         this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
+        this.multiplicador = multiplicador;
     }
 }

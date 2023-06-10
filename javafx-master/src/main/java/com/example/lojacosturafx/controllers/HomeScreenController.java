@@ -44,7 +44,7 @@ public class HomeScreenController {
 
     @FXML
     void AddonAction(ActionEvent event) {
-
+        javaFxApplication.publicarContextoPagina("adicionais");
     }
 
     @FXML
@@ -74,7 +74,7 @@ public class HomeScreenController {
 
     @FXML
     void modelsAction(ActionEvent event) {
-
+        javaFxApplication.publicarContextoPagina("modelos");
     }
 
     @FXML
@@ -84,7 +84,7 @@ public class HomeScreenController {
 
     @FXML
     void piecesAction(ActionEvent event) {
-
+        javaFxApplication.publicarContextoPagina("pecas");
     }
 
 }

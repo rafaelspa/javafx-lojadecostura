@@ -6,29 +6,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "adicionais")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Cliente {
+public class Adicional {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String telefone;
-    private String email;
+    private Double multiplicador;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    List<Medida> medidas = new ArrayList<>();
-
-    public Cliente(String nome, String telefone, String email) {
+    public Adicional(String nome, Double multiplicador) {
         this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
+        this.multiplicador = multiplicador;
     }
 }

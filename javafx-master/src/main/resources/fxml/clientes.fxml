@@ -10,31 +10,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lojacosturafx.controllers.ClienteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="245.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lojacosturafx.controllers.ClienteController">
     <children>
         <VBox layoutX="26.0" layoutY="22.0" spacing="15.0">
             <children>
-                <Label text="ID">
+<!--                <Label text="ID">-->
+<!--                    <font>-->
+<!--                        <Font size="14.0" />-->
+<!--                    </font>-->
+<!--                </Label>-->
+                <Label text="Nome">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label text="Title">
+                <Label text="Telefone">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label text="Author">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Label>
-                <Label text="Year">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Label>
-                <Label text="Pages">
+                <Label text="Email">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -43,29 +38,72 @@
         </VBox>
         <VBox layoutX="87.0" layoutY="22.0" prefHeight="130.0" prefWidth="129.0" spacing="10.0">
             <children>
-                <TextField fx:id="idField" />
-                <TextField fx:id="titleField" />
-                <TextField fx:id="authorField" />
-                <TextField fx:id="yearField" />
-                <TextField fx:id="pagesField" />
-
+<!--                <TextField fx:id="tfId" />-->
+                <TextField fx:id="tfNome" />
+                <TextField fx:id="tfTelefone" />
+                <TextField fx:id="tfEmail" />
             </children>
         </VBox>
+
         <HBox layoutX="26.0" layoutY="202.0" spacing="10.0">
             <children>
-                <Button fx:id="insertButton" mnemonicParsing="false" onAction="#insertButton" prefHeight="30.0" prefWidth="60.0" text="Insert" />
-                <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButton" prefHeight="30.0" prefWidth="60.0" text="Update" />
-                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="60.0" text="Delete" />
+                <Button fx:id="insertClienteButton" mnemonicParsing="false" onAction="#insertClienteButton" prefHeight="30.0" prefWidth="60.0" text="Insert" />
+                <Button fx:id="updateClienteButton" mnemonicParsing="false" onAction="#updateClienteButton" prefHeight="30.0" prefWidth="60.0" text="Update" />
+                <Button fx:id="deleteClienteButton" mnemonicParsing="false" onAction="#deleteClienteButton" prefHeight="30.0" prefWidth="60.0" text="Delete" />
             </children>
         </HBox>
-        <TableView fx:id="TableView" layoutX="238.0" layoutY="22.0" prefHeight="210.0" prefWidth="400.0">
+
+        <TableView fx:id="tvClientes" layoutX="238.0" layoutY="22.0" onMouseClicked="#onCliqueTvCliente" prefHeight="210.0" prefWidth="400.0">
             <columns>
-                <TableColumn fx:id="idColumn" prefWidth="35.0" text="ID" />
-                <TableColumn fx:id="titleColumn" prefWidth="120.0" text="Title" />
-                <TableColumn fx:id="authorColumn" prefWidth="120.0" text="Author" />
-                <TableColumn fx:id="yearColumn" prefWidth="60.0" text="Year" />
-                <TableColumn fx:id="pagesColumn" prefWidth="60.0" text="Pages" />
+                <TableColumn fx:id="tcId" prefWidth="35.0" text="ID" />
+                <TableColumn fx:id="tcNome" prefWidth="120.0" text="Nome" />
+                <TableColumn fx:id="tcTelefone" prefWidth="120.0" text="Telefone" />
+                <TableColumn fx:id="tcEmail" prefWidth="120.0" text="Email" />
             </columns>
         </TableView>
+
+        <VBox layoutX="26.0" layoutY="252.0" spacing="15.0">
+            <children>
+                <!--                <Label text="ID">-->
+                <!--                    <font>-->
+                <!--                        <Font size="14.0" />-->
+                <!--                    </font>-->
+                <!--                </Label>-->
+                <Label text="Nome">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label text="Tamanho">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+        <VBox layoutX="87.0" layoutY="252.0" prefHeight="130.0" prefWidth="129.0" spacing="10.0">
+            <children>
+                <!--                <TextField fx:id="tfId" />-->
+                <TextField fx:id="tfNomeMedida" />
+                <TextField fx:id="tfTamanhoMedida" />
+            </children>
+        </VBox>
+
+        <HBox layoutX="26.0" layoutY="432.0" spacing="10.0">
+            <children>
+                <Button fx:id="insertMedidaButton" mnemonicParsing="false" onAction="#insertMedidaButton" prefHeight="30.0" prefWidth="60.0" text="Insert" />
+                <Button fx:id="updateMedidaButton" mnemonicParsing="false" onAction="#updateMedidaButton" prefHeight="30.0" prefWidth="60.0" text="Update" />
+                <Button fx:id="deleteMedidaButton" mnemonicParsing="false" onAction="#deleteMedidaButton" prefHeight="30.0" prefWidth="60.0" text="Delete" />
+            </children>
+        </HBox>
+
+        <TableView fx:id="tvMedidas" layoutX="238.0" layoutY="252.0" prefHeight="210.0" prefWidth="400.0">
+            <columns>
+                <TableColumn fx:id="tcIdMedida" prefWidth="35.0" text="ID" />
+                <TableColumn fx:id="tcNomeMedida" prefWidth="120.0" text="Nome" />
+                <TableColumn fx:id="tcTamanhoMedida" prefWidth="120.0" text="Tamanho" />
+            </columns>
+        </TableView>
+      <Button fx:id="btnHome" layoutX="682.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onCliqueHome" text="Home" />
     </children>
 </AnchorPane>

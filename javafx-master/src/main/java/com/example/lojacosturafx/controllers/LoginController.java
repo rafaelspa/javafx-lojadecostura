@@ -40,31 +40,26 @@ public class LoginController {
 
     @FXML
     void onCliqueCadastro(MouseEvent event) throws IOException {
-//        javaFxApplication.mudarPagina("cadastro");
         javaFxApplication.publicarContextoPagina("cadastro");
     }
 
     @FXML
     void onCliqueEsqueciASenha(MouseEvent event) throws IOException {
-//        javaFxApplication.mudarPagina("esqueci-senha");
         javaFxApplication.publicarContextoPagina("esqueci-senha");
     }
 
     @FXML
     void onCliqueLogar(MouseEvent event) throws Exception {
-        Usuario usuario = usuarioService.findByEmail(tfEmail.getText().toString());
+        Usuario usuario = usuarioService.findByEmail(tfEmail.getText());
         if (usuario == null) {
             tfEmail.setText("");
             throw new Exception("Usuario não encontrado");
         }
-        if(usuario.getSenhaUsuario().equals(tfSenha.getText().toString())){
-//            javaFxApplication.mudarPagina(("homeScreen"));
+        if(usuario.getSenhaUsuario().equals(tfSenha.getText())){
             javaFxApplication.publicarContextoPagina(("homeScreen"));
-        }
-        else{
+        } else {
             tfSenha.setText("");
             throw new Exception("Senha incorreta");
         }
-
     }
 }

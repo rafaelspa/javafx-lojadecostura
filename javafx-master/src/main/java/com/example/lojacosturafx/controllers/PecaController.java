@@ -1,10 +1,10 @@
 package com.example.lojacosturafx.controllers;
 
 import com.example.lojacosturafx.JavaFxApplication;
-import com.example.lojacosturafx.entidades.Cliente;
 import com.example.lojacosturafx.entidades.Medida;
-import com.example.lojacosturafx.servicos.ClienteService;
+import com.example.lojacosturafx.entidades.Peca;
 import com.example.lojacosturafx.servicos.MedidaService;
+import com.example.lojacosturafx.servicos.PecaService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,9 +26,9 @@ import java.util.ResourceBundle;
 
 @RequiredArgsConstructor
 @Component
-public class ClienteController implements Initializable {
+public class PecaController implements Initializable {
 
-    private final ClienteService clienteService;
+    private final PecaService pecaService;
     private final MedidaService medidaService;
     private final JavaFxApplication javaFxApplication;
 
@@ -39,10 +39,7 @@ public class ClienteController implements Initializable {
     private TextField tfNome;
 
     @FXML
-    private TextField tfTelefone;
-
-    @FXML
-    private TextField tfEmail;
+    private TextField tfPrecoBase;
 
     @FXML
     private TextField tfIdMedida;
@@ -54,22 +51,19 @@ public class ClienteController implements Initializable {
     private TextField tfTamanhoMedida;
 
     @FXML
-    private TableView<Cliente> tvClientes;
+    private TableView<Peca> tvPecas;
 
     @FXML
     private TableView<Medida> tvMedidas;
 
     @FXML
-    private TableColumn<Cliente, Long> tcId;
+    private TableColumn<Peca, Long> tcId;
 
     @FXML
-    private TableColumn<Cliente, String> tcNome;
+    private TableColumn<Peca, String> tcNome;
 
     @FXML
-    private TableColumn<Cliente, String> tcTelefone;
-
-    @FXML
-    private TableColumn<Cliente, String> tcEmail;
+    private TableColumn<Peca, Double> tcPrecoBase;
 
     @FXML
     private TableColumn<Medida, Long> tcIdMedida;
@@ -81,37 +75,37 @@ public class ClienteController implements Initializable {
     private TableColumn<Medida, Double> tcTamanhoMedida;
     
     @FXML
-    private void insertClienteButton() {
-        clienteService.create(new Cliente(tfNome.getText(), tfTelefone.getText(), tfEmail.getText()));
-        showCliente();
-        clearFTCliente();
+    private void insertPecaButton() {
+        pecaService.create(new Peca(tfNome.getText(), Double.parseDouble(tfPrecoBase.getText())));
+        showPeca();
+        clearFTPeca();
     }
 
     @FXML
-    private void updateClienteButton() throws Exception {
-        Cliente cliente = pegarClienteDaLinha();
-        clienteService.update(cliente.getId(), tfNome.getText(), tfTelefone.getText(), tfEmail.getText());
-        showCliente();
-        clearFTCliente();
+    private void updatePecaButton() throws Exception {
+        Peca peca = pegarPecaDaLinha();
+        pecaService.update(peca.getId(), tfNome.getText(), Double.parseDouble(tfPrecoBase.getText()));
+        showPeca();
+        clearFTPeca();
     }
 
     @FXML
-    private void deleteClienteButton() {
-        Cliente cliente = pegarClienteDaLinha();
-        clienteService.delete(cliente.getId());
-        showCliente();
-        clearFTCliente();
+    private void deletePecaButton() {
+        Peca peca = pegarPecaDaLinha();
+        pecaService.delete(peca.getId());
+        showPeca();
+        clearFTPeca();
     }
 
     @FXML
     private void insertMedidaButton() throws Exception {
-        Cliente cliente = pegarClienteDaLinha();
+        Peca peca = pegarPecaDaLinha();
         Medida medida = new Medida(tfNomeMedida.getText(), Double.parseDouble(tfTamanhoMedida.getText()));
         medidaService.create(medida);
-        clienteService.addMedida(cliente.getId(), medida);
-        showCliente();
+        pecaService.addMedida(peca.getId(), medida);
+        showPeca();
         showMedida();
-        selecionaCliente(cliente.getId());
+        selecionaPeca(peca.getId());
         clearFTMedida();
     }
 
@@ -136,31 +130,30 @@ public class ClienteController implements Initializable {
         javaFxApplication.publicarContextoPagina("homeScreen");
     }
 
-    public ObservableList<Cliente> getClienteList(){
-        ObservableList<Cliente> clienteList = FXCollections.observableArrayList();
-        List<Cliente> clientes = clienteService.findAll();
-        if (!clientes.isEmpty()) {
-            clienteList.addAll(clientes);
+    public ObservableList<Peca> getPecaList(){
+        ObservableList<Peca> pecaList = FXCollections.observableArrayList();
+        List<Peca> pecas = pecaService.findAll();
+        if (!pecas.isEmpty()) {
+            pecaList.addAll(pecas);
         }
-        return clienteList;
+        return pecaList;
     }
 
-    public void showCliente() {
-        ObservableList<Cliente> lista = getClienteList();
+    public void showPeca() {
+        ObservableList<Peca> lista = getPecaList();
 
-        tcId.setCellValueFactory(new PropertyValueFactory<Cliente, Long>("id"));
-        tcNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nome"));
-        tcTelefone.setCellValueFactory(new PropertyValueFactory<Cliente, String>("telefone"));
-        tcEmail.setCellValueFactory(new PropertyValueFactory<Cliente, String>("email"));
+        tcId.setCellValueFactory(new PropertyValueFactory<Peca, Long>("id"));
+        tcNome.setCellValueFactory(new PropertyValueFactory<Peca, String>("nome"));
+        tcPrecoBase.setCellValueFactory(new PropertyValueFactory<Peca, Double>("precoBase"));
 
-        tvClientes.setItems(lista);
+        tvPecas.setItems(lista);
     }
 
-    public ObservableList<Medida> getMedidaClienteList(){
-        Cliente cliente = pegarClienteDaLinha();
+    public ObservableList<Medida> getMedidaPecaList(){
+        Peca peca = pegarPecaDaLinha();
         ObservableList<Medida> medidaClienteList = FXCollections.observableArrayList();
-        if (cliente != null) {
-            List<Medida> medidas = cliente.getMedidas();
+        if (peca != null) {
+            List<Medida> medidas = peca.getMedidas();
             if (!medidas.isEmpty()) {
                 medidaClienteList.addAll(medidas);
             }
@@ -169,7 +162,7 @@ public class ClienteController implements Initializable {
     }
 
     private void showMedida() {
-        ObservableList<Medida> listaMedidas = getMedidaClienteList();
+        ObservableList<Medida> listaMedidas = getMedidaPecaList();
 
         tcIdMedida.setCellValueFactory(new PropertyValueFactory<Medida, Long>("id"));
         tcNomeMedida.setCellValueFactory(new PropertyValueFactory<Medida, String>("nome"));
@@ -178,11 +171,10 @@ public class ClienteController implements Initializable {
         tvMedidas.setItems(listaMedidas);
     }
 
-    public void clearFTCliente() {
+    public void clearFTPeca() {
         if (tfId != null) tfId.setText("");
         tfNome.setText("");
-        tfTelefone.setText("");
-        tfEmail.setText("");
+        tfPrecoBase.setText("");
     }
 
     private void clearFTMedida() {
@@ -191,8 +183,8 @@ public class ClienteController implements Initializable {
         tfTamanhoMedida.setText("");
     }
 
-    public Cliente pegarClienteDaLinha() {
-        return tvClientes.getSelectionModel().getSelectedItem();
+    public Peca pegarPecaDaLinha() {
+        return tvPecas.getSelectionModel().getSelectedItem();
     }
 
     public Medida pegarMedidaDaLinha() {
@@ -200,19 +192,19 @@ public class ClienteController implements Initializable {
     }
 
     @FXML
-    void onCliqueTvCliente(MouseEvent event) {
+    void onCliqueTvPeca(MouseEvent event) {
         showMedida();
     }
 
-    public void selecionaCliente(Long id) {
-        tvClientes.requestFocus();
-        tvClientes.getSelectionModel().select(id.intValue() - 1);
-        tvClientes.getFocusModel().focus(id.intValue() - 1);
-        onCliqueTvCliente(null);
+    public void selecionaPeca(Long id) {
+        tvPecas.requestFocus();
+        tvPecas.getSelectionModel().select(id.intValue() - 1);
+        tvPecas.getFocusModel().focus(id.intValue() - 1);
+        onCliqueTvPeca(null);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        showCliente();
+        showPeca();
     }
 }
